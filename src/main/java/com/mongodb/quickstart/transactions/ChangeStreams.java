@@ -38,29 +38,28 @@ public class ChangeStreams {
     }
 
     private static CreateCollectionOptions productJsonSchemaValidator() {
-        String jsonSchema = """
-                            {
-                              "$jsonSchema": {
-                                "bsonType": "object",
-                                "required": ["_id", "price", "stock"],
-                                "properties": {
-                                  "_id": {
-                                    "bsonType": "string",
-                                    "description": "must be a string and is required"
-                                  },
-                                  "price": {
-                                    "bsonType": "decimal",
-                                    "minimum": 0,
-                                    "description": "must be a non-negative decimal and is required"
-                                  },
-                                  "stock": {
-                                    "bsonType": "int",
-                                    "minimum": 0,
-                                    "description": "must be a non-negative integer and is required"
-                                  }
-                                }
-                              }
-                            }""";
+        String jsonSchema = "{\n" +
+                "  \"$jsonSchema\": {\n" +
+                "    \"bsonType\": \"object\",\n" +
+                "    \"required\": [\"_id\", \"price\", \"stock\"],\n" +
+                "    \"properties\": {\n" +
+                "      \"_id\": {\n" +
+                "        \"bsonType\": \"string\",\n" +
+                "        \"description\": \"must be a string and is required\"\n" +
+                "      },\n" +
+                "      \"price\": {\n" +
+                "        \"bsonType\": \"decimal\",\n" +
+                "        \"minimum\": 0,\n" +
+                "        \"description\": \"must be a non-negative decimal and is required\"\n" +
+                "      },\n" +
+                "      \"stock\": {\n" +
+                "        \"bsonType\": \"int\",\n" +
+                "        \"minimum\": 0,\n" +
+                "        \"description\": \"must be a non-negative integer and is required\"\n" +
+                "      }\n" +
+                "    }\n" +
+                "  }\n" +
+                "}";
         return new CreateCollectionOptions().validationOptions(
                 new ValidationOptions().validationAction(ValidationAction.ERROR)
                                        .validator(BsonDocument.parse(jsonSchema)));

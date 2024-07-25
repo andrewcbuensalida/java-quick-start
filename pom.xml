@@ -10,8 +10,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven-compiler-plugin.source>21</maven-compiler-plugin.source>
-        <maven-compiler-plugin.target>21</maven-compiler-plugin.target>
+        <!-- changed from 21 to 11 because dockerfile is using maven:3.6.3-openjdk-11. Maybe if using a newer version of maven, 21 would work -->
+        <maven-compiler-plugin.source>11</maven-compiler-plugin.source>
+        <maven-compiler-plugin.target>11</maven-compiler-plugin.target>
         <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
         <mongodb-driver-sync.version>5.0.0</mongodb-driver-sync.version>
         <mongodb-crypt.version>1.8.0</mongodb-crypt.version>

@@ -51,32 +51,30 @@ public class Transactions {
         clearCollections();
         insertProductBeer();
         printDatabaseState();
-        System.out.println("""
-                           #########  NO  TRANSACTION #########
-                           Alice wants 2 beers.
-                           We have to create a cart in the 'cart' collection and update the stock in the 'product' collection.
-                           The 2 actions are correlated but can not be executed at the same cluster time.
-                           Any error blocking one operation could result in stock error or a sale of beer that we can't fulfill as we have no stock.
-                           ------------------------------------""");
+        // can't use triple quotes because java 11 doesn't support it
+        System.out.println("#########  NO  TRANSACTION #########");
+        System.out.println("Alice wants 2 beers.");
+        System.out.println("We have to create a cart in the 'cart' collection and update the stock in the 'product' collection.");
+        System.out.println("The 2 actions are correlated but can not be executed at the same cluster time.");
+        System.out.println("Any error blocking one operation could result in stock error or a sale of beer that we can't fulfill as we have no stock.");
+        System.out.println("------------------------------------");
         aliceWantsTwoBeers();
         sleep();
         removingBeersFromStock();
         System.out.println("####################################\n");
         printDatabaseState();
         sleep();
-        System.out.println("""
-                           ######### WITH TRANSACTION #########
-                           Alice wants 2 extra beers.
-                           Now we can update the 2 collections simultaneously.
-                           The 2 operations only happen when the transaction is committed.
-                           ------------------------------------""");
+        System.out.println("######### WITH TRANSACTION #########");
+        System.out.println("Alice wants 2 extra beers.");
+        System.out.println("Now we can update the 2 collections simultaneously.");
+        System.out.println("The 2 operations only happen when the transaction is committed.");
+        System.out.println("------------------------------------");
         aliceWantsTwoExtraBeersInTransactionThenCommitOrRollback(client);
         sleep();
-        System.out.println("""
-                           ######### WITH TRANSACTION #########
-                           Alice wants 2 extra beers.
-                           This time we do not have enough beers in stock so the transaction will rollback.
-                           ------------------------------------""");
+        System.out.println("######### WITH TRANSACTION #########");
+        System.out.println("Alice wants 2 extra beers.");
+        System.out.println("This time we do not have enough beers in stock so the transaction will rollback.");
+        System.out.println("------------------------------------");
         aliceWantsTwoExtraBeersInTransactionThenCommitOrRollback(client);
     }
 
