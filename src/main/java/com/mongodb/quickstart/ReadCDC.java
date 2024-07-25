@@ -2,9 +2,6 @@
 
 package com.mongodb.quickstart;
 
-public 
-package com.mongodb.quickstart;
-
 import com.mongodb.client.*;
 import org.bson.Document;
 
@@ -18,16 +15,14 @@ import static com.mongodb.client.model.Sorts.descending;
 
 public class ReadCDC {
 
-    public static void main(String[] args) {
-        try (MongoClient mongoClient = MongoClients.create(System.getProperty("mongodb.uri"))) {
-            MongoDatabase sampleTrainingDB = mongoClient.getDatabase("myDatabase");
-            MongoCollection<Document> myCDCCollection = sampleTrainingDB.getCollection("myCollection");
+  public static void main(String[] args) {
+    try (MongoClient mongoClient = MongoClients.create(System.getProperty("mongodb.uri"))) { // mongodb.uri is an argument when running mvn compile
+      MongoDatabase sampleTrainingDB = mongoClient.getDatabase("myDatabase");
+      MongoCollection<Document> myCDCCollection = sampleTrainingDB.getCollection("myCollection");
 
-        Document cdcDocument = myCDCCollection.find(new Document("recordId", "CDC")).first();
-        System.out.println("CDC Record: " + cdcDocument.toJson());
+      Document cdcDocument = myCDCCollection.find(new Document("recordId", "CDC")).first();
+      System.out.println("CDC Record: " + cdcDocument.toJson());
 
-        }
     }
-} {
-  
+  }
 }
